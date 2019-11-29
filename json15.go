@@ -49,3 +49,33 @@ func ambientes(w http.ResponseWriter, _ *http.Request) {
 	
 	json.NewEncoder(w).Encode(baño)
 }
+
+
+///// sensores
+
+
+type Sensores struct {
+	Tipo   string
+	Nombre string
+	Ubicacion string
+	Protocolo string
+}
+
+func sensores(w http.ResponseWriter, _ *http.Request) {
+	sens_comedor := Sensores{Tipo: "temperatura", Nombre: "sens_comedor", Ubicacion: "sobre puerta",Protocolo: "mqtt"}
+	sens_cocina := Sensores{Tipo: "temperatura", Nombre: "sens_cocina", Ubicacion: "sobre puerta",Protocolo: "mqtt"}
+	sens_living :=Sensores{Tipo: "movimiento", Nombre: "sens_living", Ubicacion: "costado puerta",Protocolo: "mqtt"}
+	sens_habitacion1 := Sensores{Tipo: "temperatura", Nombre: "sens_habitacion1", Ubicacion: "sobre puerta",Protocolo: "mqtt"}
+	sens_habitacion2 := Sensores{Tipo: "temperatura", Nombre: "sens_habitacion2", Ubicacion: "sobre puerta",Protocolo: "mqtt"}
+	sens_habitacion3 := Sensores{Tipo: "temperatura", Nombre: "sens_habitacion3", Ubicacion: "sobre puerta",Protocolo: "mqtt"}
+	sens_baño := Sensores{Tipo: "temperatura/humedad", Nombre: "sens_baño", Ubicacion: "sobre puerta",Protocolo: "mqtt"}
+	
+	json.NewEncoder(w).Encode(sens_comedor)
+	json.NewEncoder(w).Encode(sens_cocina)
+	json.NewEncoder(w).Encode(sens_living)
+	json.NewEncoder(w).Encode(sens_habitacion1)
+	json.NewEncoder(w).Encode(sens_habitacion2)
+	json.NewEncoder(w).Encode(sens_habitacion3)
+	
+	json.NewEncoder(w).Encode(sens_baño)
+}
