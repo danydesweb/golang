@@ -8,36 +8,38 @@ import (
   "time"
 )
 
-//define a function for the default message handler
+// define una función para el manejador de mensajes predeterminado
 var f MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
   fmt.Printf("TOPIC: %s\n", msg.Topic())
   fmt.Printf("MSG: %s\n", msg.Payload())
 }
 
 func main() {
-  //create a ClientOptions struct setting the broker address, clientid, turn
-  //off trace output and set the default message handler
+  //crear una estructura ClientOptions configurando la dirección del agente, cliente
+
   opts := MQTT.NewClientOptions().AddBroker("tcp://mqtt.eclipse.org:1883")
-  opts.SetClientID("go-simple")
+  opts.SetClientID("go-sample")
   opts.SetDefaultPublishHandler(f)
 
-  //create and start a client using the above ClientOptions
+  //crear e iniciar un cliente usando las ClientOptions 
   c := MQTT.NewClient(opts)
   if token := c.Connect(); token.Wait() && token.Error() != nil {
     panic(token.Error())
   }
 
-  //subscribe to the topic /go-mqtt/sample and request messages to be delivered
-  //at a maximum qos of zero, wait for the receipt to confirm the subscription
-  if token := c.Subscribe("go-mqtt/sample", 0, nil); token.Wait() && token.Error() != nil {
+  //subscribe al topic /go-mqtt/sample y solicita mensajes
+  // espera el recibo para confirmar la suscripcion
+
+
+  if token := c.Subscribe("go-mqtt/sample ", 0, nil); token.Wait() && token.Error() != nil {
     fmt.Println(token.Error())
     os.Exit(1)
   }
 
-  //Publish 5 messages to /go-mqtt/sample at qos 1 and wait for the receipt
-  //from the server after sending each message
+  //Publica  5 mensajes en /go-mqtt/sample 
+  // el servidor después de envia cada mensaje
   for i := 0; i < 5; i++ {
-    text := fmt.Sprintf("Yo soy Danielito #%d!", i)
+    text := fmt.Sprintf("Yo soy Danielito,Fer me tomando sabes cuantas cervezas?????  #%d!", i)
     token := c.Publish("go-mqtt/sample", 0, false, text)
     token.Wait()
   }
