@@ -7,11 +7,11 @@ import (
 
 func main() {
 	op := func(i int) {
-		fmt.Println("op", i, time.Now().Format("5"))
+		fmt.Println("rutina 1", i, time.Now().Format("5"))
 		time.Sleep(1 * time.Second)
-		fmt.Println("op", i, time.Now().Format("5"))
+		fmt.Println("rutina  2", i, time.Now().Format("5"))
 		time.Sleep(1 * time.Millisecond)
-		fmt.Println("temporizador ", i, time.Now().Format("5"))
+		fmt.Println("rutina 3 ", i, time.Now().Format("5"))
 
 	}
 
