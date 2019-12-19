@@ -52,7 +52,7 @@ func main() {
 		client.SendMessage(m.Chat.ID, "Te espero pronto !")
 	})
 	bot.HandleMessage("broker", func(m *tbot.Message) {
-		func (broker())
+			bot.HandleCallback(broker)
 	})
 
 	bot.HandleMessage("horoscopo", func(m *tbot.Message) {
