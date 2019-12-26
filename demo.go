@@ -26,10 +26,10 @@ var f MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
 	fmt.Printf("MSG: %s\n", msg.Payload())
 
 
-func main{
+
 
 	
-	func main() {
+func main() {
 
 		http.HandleFunc("/", )
 		http.HandleFunc("/ambiente", "")
