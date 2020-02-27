@@ -6,32 +6,34 @@ import (
   _ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-type Product struct {
+type Dispositivo struct {
   gorm.Model
-  Code string
-  Price uint
+  Dispositivo string
+  Codigo uint
+  Tipo  string
+  Ubicacion string
 }
 
 func main() {
 
 	log.Printf("Conectando a base de datos!")
 
-  db, err := gorm.Open("vtwlajng", "vtwlajng")
+  db, err := gorm.Open("vtwlajng", "U27Dryhunm7bdKbAinQ5KcRXc894A-Nn")
   if err != nil {
     panic("failed to connect database")
   }
   defer db.Close()
 
   // Migrate the schema
-  db.AutoMigrate(&Product{})
+  db.AutoMigrate(&Dispositivo{})
 
   // Create
-  db.Create(&Product{Code: "L1212", Price: 1000})
+  db.Create(&Dispositivo{Dispositivo: "sensor luz", Codigo: 1000,Tipo: "Input", Ubicacion: "Patio"})
 
   // Read
-  var product Product
+  var Dispositivo Dispositivo1
   db.First(&product, 1) // find product with id 1
-  db.First(&product, "code = ?", "L1212") // find product with code l1212
+  db.First(&Dispositivo, Dispositivo: "sensor luz", Codigo: 1000,Tipo: "Input", Ubicacion: "Patio") // find product with code l1212
 
   // Update - update product's price to 2000
   db.Model(&product).Update("Price", 2000)
