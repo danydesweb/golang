@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-
+	"encoding/json"
 	"log"
     "github.com/jinzhu/gorm"
     _ "github.com/jinzhu/gorm/dialects/postgres"
@@ -14,12 +14,6 @@ import (
 	
 )
 
-
-const token = "1061491150:AAHd2hlo9dPkxLajLWpsBzhCNc6XD_jg79w"
-const mqttServer = "broker.shiftr.io"
-const  mqttUser = "8a1ebb76"
-const  mqttPassword = "ea34575201459ef"
-const f = "Conectado a mqtt"
 
 type Estado struct { 
 	event_type  int
@@ -52,7 +46,7 @@ func main() {
 
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/contact", contactHandler)
-	
+	http.HandleFunc("/User1", User1)
 	//start the server
 
 	http.ListenAndServe(":3001", nil)
@@ -67,7 +61,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Contactos"))
+	w.Write([]byte("hola manola"))
 
 	db, err := gorm.Open("postgres", "host=hansken.db.elephantsql.com port=5432 user=vtwlajng dbname=vtwlajng password=U27Dryhunm7bdKbAinQ5KcRXc894A-Nn")                                                                              
                                                                                                                                                                                                                                      
@@ -77,6 +71,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	  initialMigration(db)
 	  handleRequest(db)
 	  handlerFunc("hola")
+	 // http.HandleFunc("/new", newUser(db *gorm.DB) )
 	 
 	}                                                                                                                                                                                                                                  
 																																																									   
@@ -157,4 +152,12 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
   func initialMigration(db *gorm.DB) {
   
 	  db.AutoMigrate(&User{})
+}
+
+func User1(w http.ResponseWriter, _ *http.Request) {
+	juan := User{Name: "Pedro", Email: "comedor@gamil.com"}
+	
+	
+	json.NewEncoder(w).Encode(juan)
+	
 }
