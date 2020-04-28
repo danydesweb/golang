@@ -43,9 +43,9 @@ func (base *Base) BeforeCreate(scope *gorm.Scope) error {
 	UserID uuid.UUID `gorm:"type:uuid;column:user_foreign_key;not null;"`
    }
   
-   profile := &Profile{Name: "New User", UserID: user.Base.ID}
-	if db.Create(&profile).Error != nil {
-	 log.Panic("Unable to create profile.")
+   var profile = &Profile{Name: "New User", UserID: user.Base.ID}
+		if db.Create(&profile).Error != nil {
+	 	log.Panic("Unable to create profile.")
 	}
    fetchedUser := &User{}
 	if db.Where("id = ?", profile.UserID).Preload("Profile").First(&fetchedUser).RecordNotFound() {
@@ -75,6 +75,7 @@ func main() {
 	opts := MQTT.NewClientOptions()
 	opts.AddBroker(*broker)
 	opts.SetClientID(*id)
+	
 	opts.SetUsername(*user)
 	opts.SetPassword(*password)
 	opts.SetCleanSession(*cleansess)
@@ -92,7 +93,7 @@ func main() {
 	db.AutoMigrate(&User{}, &Profile{})
 	user := &User{SomeFlag: false}
 	if db.Create(&user).Error != nil {
-	s log.Panic("Unable to create user.")	
+	 log.Panic("Unable to create user.")	
 	}
 	log.Println("Sample Publisher Started")
 
