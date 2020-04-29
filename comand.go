@@ -40,19 +40,19 @@ func (base *Base) BeforeCreate(scope *gorm.Scope) error {
    type Profile struct {
 	Base
 	Name   string    `gorm:"column:name;size:128;not null;"`
-	UserID uuid.UUID `gorm:"type:uuid;column:user_foreign_key;not null;"`
+	UserID uuid.UUID `gorm:"type:uuid;column:user_foreign_key;not null"`
    }
   
-   var profile = &Profile{Name: "New User", UserID: user.Base.ID}
-		if db.Create(&profile).Error != nil {
-	 	log.Panic("Unable to create profile.")
-	}
-   fetchedUser := &User{}
-	if db.Where("id = ?", profile.UserID).Preload("Profile").First(&fetchedUser).RecordNotFound() {
-	 log.Panic("Unable to find created user.")
-	}
-   fmt.Printf("User: %+v\n", fetchedUser)
-   }
+   var profile = &Profile{Name: "New User", UserID: user.Base.ID,}
+	//	if db.Create(&profile).Error != nil {
+	 //	log.Panic("Unable to create profile.")
+	//}
+   var fetchedUser = &User{}
+	//if db.Where("id = ?", profile.UserID).Preload("Profile").First(&fetchedUser).RecordNotFound() {
+	 //log.Panic("Unable to find created user.")
+	//}
+  // fmt.Printf("User: %+v\n", fetchedUser)
+   //}
 func main() {
 	log.Printf("Hola!")
 
