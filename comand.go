@@ -10,7 +10,7 @@ import (
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 	// "github.com/gorilla/websocket"
 	// "golang.org/x/net/proxy"
-
+	"time"
 	"github.com/jinzhu/gorm"
  _ "github.com/jinzhu/gorm/dialects/postgres"
  "github.com/satori/go.uuid"
