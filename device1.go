@@ -32,16 +32,16 @@ func (base *Base) BeforeCreate(scope *gorm.Scope) {
    }
    // User is the model for the user table.
    type User5 struct {
-	Name   string    `gorm:"column:name;size:128;not null;"`
-	UserID uuid.UUID `gorm:"type:uuid;column:user_foreign_key;not null"`
-	Email   string    `gorm:"column:email;size:128;not null;"`
+	Name   string    //`gorm:"column:name;size:128;not null;"`
+	UserID uuid.UUID //`gorm:"type:uuid;not null"`
+	Email   string    //`gorm:"column:email;size:128;not null;"`
 	Profile  Profile
    }
    // Profile is the model for the profile table.
    type Profile struct {
 
-	Name   string    `gorm:"column:name;size:128;not null;"`
-	UserID uuid.UUID `gorm:"type:uuid;column:user_foreign_key;not null"`
+	Name   string   // `gorm:"column:name;size:128;not null;"`
+	UserID uuid.UUID //`gorm:"type:uuid;not null"`
    }
   
    //var profile = &Profile{Name: "New User", UserID: user.ID,}
