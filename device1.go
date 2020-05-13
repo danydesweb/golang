@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"log"
-	"os"
+	//"os"
 	//"fmt"
 	//"strconv"
 
@@ -98,7 +98,7 @@ func main() {
 	}*/
 	log.Println("Sample Publisher Started")
 
-	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_APITOKEN"))
+	bot, err := tgbotapi.NewBotAPI(("1061491150:AAHd2hlo9dPkxLajLWpsBzhCNc6XD_jg79w"))
 	if err != nil {
 		panic(err) // You should add better error handling than this!
 	}
@@ -164,6 +164,20 @@ func main() {
 					msg.Text = "Ahora va..."
 				} else {
 					msg.Text = "A cuantos grados?"
+				}
+
+			case "signup":
+				if update.Message.CommandArguments() != "" {
+					var payload []byte = []byte{0}
+					input := update.Message.CommandArguments()
+					payload[0] = input[0] - 48
+
+					log.Printf("registro de usuario", payload)
+					token := client.Publish(*topic, byte(*qos), false, payload) // *payload)
+					token.Wait()
+					msg.Text = "Ahora va..."
+				} else {
+					msg.Text = "Ingresa tu email"
 				}
 			case "help":
 				msg.Text = "type /sayhi or /status."
