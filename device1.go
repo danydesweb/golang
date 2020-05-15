@@ -178,6 +178,19 @@ func main() {
 					msg.Text = "Ahora va..."
 				} else {
 					msg.Text = "Ingresa tu email"
+						func verif {
+							(`INSERT INTO user5 ('email')
+							VALUES(input)`)
+						}
+						/*func (m *Message) Command() string {
+							command := m.CommandWithAt()
+						
+							if i := strings.Index(command, "@"); i != -1 {
+								command = command[:i]
+							}
+						
+							return command
+						}*/
 				}
 			case "help":
 				msg.Text = "type /sayhi or /status."
