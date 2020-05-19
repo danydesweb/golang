@@ -169,14 +169,17 @@ func main() {
 
 			case "signup":
 				if update.Message.CommandArguments() != "" {
-					var payload []byte = []byte{0}
+					//var payload []byte = []byte{0}
 					input := update.Message.CommandArguments()
-					payload[0] = input[0] - 48
+					//user = User5{input}
+					
+					
+					 //newuser := User5{ Email:input} db.NewRecord(newuser)
 					log.Printf(input)
-					log.Printf(input, payload)
-					/*token := client.Publish(*topic, byte(*qos), false, payload) // *payload)
-					token.Wait()*/
-					msg.Text = "Ahora va..."
+
+					//func (newuser *User5) BeforeCreate(scope *gorm.Scope) 
+
+					msg.Text = "Usuario creado"
 				} else {
 					msg.Text = "Ingresa tu email"
 					//log.Printf(input)
