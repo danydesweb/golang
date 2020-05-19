@@ -55,18 +55,19 @@ func (base *Base) BeforeCreate(scope *gorm.Scope) {
   // fmt.Printf("User: %+v\n", fetchedUser)
    //}
 func main() {
+
 	log.Printf("Hola!")
 
 	//
 	//mqtt
 	//
-	topic := flag.String("topic", "esp/test", "The topic name to/from which to publish/subscribe")
+	//topic := flag.String("topic", "esp/test", "The topic name to/from which to publish/subscribe")
 	broker := flag.String("broker", "tcp://broker.shiftr.io:1883", "The broker URI. ex: tcp://10.10.1.1:1883")
 	password := flag.String("password", "try", "The password (optional)")
 	user := flag.String("user", "try", "The User (optional)")
 	id := flag.String("id", "fercho-command-center", "The ClientID (optional)")
 	cleansess := flag.Bool("clean", false, "Set Clean Session (default false)")
-	qos := flag.Int("qos", 0, "The Quality of Service 0,1,2 (default 0)")
+	//qos := flag.Int("qos", 0, "The Quality of Service 0,1,2 (default 0)")
 	// num := flag.Int("num", 1, "The number of messages to publish or subscribe (default 1)")
 	// payload := flag.String("message", "", "The message text to publish (default empty)")
 	// action := flag.String("action", "", "Action publish or subscribe (required)")
@@ -152,7 +153,7 @@ func main() {
 		if update.Message.IsCommand() {
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 			switch update.Message.Command() {
-			case "calentar":
+			/*case "calentar":
 				if update.Message.CommandArguments() != "" {
 					var payload []byte = []byte{0}
 					input := update.Message.CommandArguments()
@@ -164,23 +165,24 @@ func main() {
 					msg.Text = "Ahora va..."
 				} else {
 					msg.Text = "A cuantos grados?"
-				}
+				}*/
 
 			case "signup":
 				if update.Message.CommandArguments() != "" {
 					var payload []byte = []byte{0}
 					input := update.Message.CommandArguments()
 					payload[0] = input[0] - 48
-
-					log.Printf("registro de usuario", payload)
-					token := client.Publish(*topic, byte(*qos), false, payload) // *payload)
-					token.Wait()
+					log.Printf(input)
+					log.Printf(input, payload)
+					/*token := client.Publish(*topic, byte(*qos), false, payload) // *payload)
+					token.Wait()*/
 					msg.Text = "Ahora va..."
 				} else {
 					msg.Text = "Ingresa tu email"
-						func verif {
+					//log.Printf(input)
+					/*	func verif (){
 							(`INSERT INTO user5 ('email')
-							VALUES(input)`)
+							VALUES(input)`)*/
 						}
 						/*func (m *Message) Command() string {
 							command := m.CommandWithAt()
@@ -189,20 +191,19 @@ func main() {
 								command = command[:i]
 							}
 						
-							return command
-						}*/
+							return command*/
+						}
+				bot.Send(msg)
 				}
-			case "help":
+			/*case "help":
 				msg.Text = "type /sayhi or /status."
 			case "sayhi":
-				msg.Text = "Hi :)"
-			case "status":
+				msg.Text = "Hi :)"			case "status":
 				msg.Text = "I'm ok."
 			default:
-				msg.Text = "I don't know that command"
+				msg.Text = "I don't know that command"*/
+				
 			}
-			bot.Send(msg)
+			//bot.Send(msg)
 		}
 
-	}
-}
