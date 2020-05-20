@@ -173,7 +173,10 @@ func main() {
 					input := update.Message.CommandArguments()
 					//user = User5{input}
 					
-					
+					user := input//&User5{SomeFlag: false}
+						if db.Create(&user).Error != nil {
+						log.Panic("Unable to create user.")
+						}
 					 //newuser := User5{ Email:input} db.NewRecord(newuser)
 					log.Printf(input)
 
@@ -182,10 +185,7 @@ func main() {
 					msg.Text = "Usuario creado"
 				} else {
 					msg.Text = "Ingresa tu email"
-					//log.Printf(input)
-					/*	func verif (){
-							(`INSERT INTO user5 ('email')
-							VALUES(input)`)*/
+					
 						}
 						/*func (m *Message) Command() string {
 							command := m.CommandWithAt()
@@ -209,4 +209,3 @@ func main() {
 			}
 			//bot.Send(msg)
 		}
-
